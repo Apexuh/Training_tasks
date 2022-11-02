@@ -118,12 +118,6 @@
 # gr.show_bar()
 
 
-
-
-
-
-
-
 # Видео-разбор подвига (решение смотреть только после своей попытки): https://youtu.be/ZTCdEB_6h1I
 # Подвиг 7. Объявите в программе следующие несколько классов:
 # CPU - класс для описания процессоров;
@@ -149,7 +143,6 @@
 # 'Память: <наименование_1> - <объем_1>; <наименование_2> - <объем_2>; ...; <наименование_N> - <объем_N>']
 # Создайте объект mb класса MotherBoard с одним CPU (объект класса CPU) и двумя слотами памяти (объекты класса Memory).
 # P.S. Отображать на экране ничего не нужно, только создать объект по указанным требованиям.
-
 
 
 # class CPU:
@@ -179,10 +172,6 @@
 #
 # mbb = Motheroard('Gigabyte', CPU('Intel', '3.3'), Memory('Kingston',2000), Memory('Kingston', 2000))
 # print(mbb.get_config())
-
-
-
-
 
 
 # Видео-разбор подвига (решение смотреть только после своей попытки): https://youtu.be/HbtVara1GPI
@@ -258,7 +247,6 @@
 # print(cart.__dict__.items())
 
 
-
 # Видео-разбор подвига (решение смотреть только после своей попытки): https://youtu.be/3WfWCBKRKIM
 # Подвиг 9. Вам необходимо реализовать односвязный список (не список языка Python, объекты в списке не хранить,
 # а формировать связанную структуру, показанную на рисунке) из объектов класса ListObject:
@@ -287,7 +275,6 @@
 # Sample Output:
 
 
-
 # class ListObject:
 #     def __init__(self, data):
 #         self.data = data
@@ -305,16 +292,6 @@
 #     obj_new = ListObject(lst_in[i])
 #     obj.link(obj_new)
 #     obj = obj_new
-
-
-
-
-
-
-
-
-
-
 
 
 # Видео-разбор подвига (решение смотреть только после своей попытки): https://youtu.be/gmjwMakXk0c
@@ -341,11 +318,32 @@
 # Создайте экземпляр pole_game класса GamePole с размером поля N = 10 и числом мин M = 12.
 # P.S. На экран в программе ничего выводить не нужно.
 
+from random import randint
+class Cell:
+    def __init__(self, around_mines=0, mine=False):
+        self.around_mines = around_mines
+        self.mine = mine
+        self.fl_open = False
 
-# class Cell:
-#     def __init__(self, around_mines, mine):
-#         self.around_mines = around_mines
-#         self.mine = mine
-#
-#
-# class GamePole:
+
+class GamePole:
+    def __init__(self, N, M):
+        self._n = N
+        self._m = M
+        self.pole = [[Cell() for _ in range(self._n)] for _ in range(self._n)]
+        self.init()
+
+    def init(self):
+        m = 0
+        while m < self._m:
+            i = randint(0, self._n - 1)
+            j = randint(0, self._n - 1)
+            if self.pole[i][j].mine:
+                continue
+            self.pole[i][j].mine = True
+            m += 1
+
+
+
+pole_game = GamePole(10, 3)
+print(pole_game.__dict__)
