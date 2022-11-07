@@ -1,0 +1,26 @@
+11
+Obj
+A : Obj
+B : Obj
+C : Obj
+F : A
+K : A B
+Z : B
+G : C
+L : F K
+N : G
+P : L Z N
+13
+N P
+G Z
+A K
+A A
+Obj B
+B P
+N G
+G L
+Z P
+P Z
+Obj k
+K B
+K C
