@@ -286,5 +286,269 @@
 #         else:
 #             print('No')
 
+# another way
+# n = int(input())
+#
+# parents = {}
+# for _ in range(n):
+#     a = input().split()
+#     parents[a[0]] = [] if len(a) == 1 else a[2:]
+#
+# def is_parent(child, parent):
+#     return child == parent or any(map(lambda p: is_parent(p, parent), parents[child]))
+#
+# q = int(input())
+# for _ in range(q):
+#     a, b = input().split()
+#     print("Yes" if is_parent(b, a) else "No")
+
+
+
+
+# Реализуйте структуру данных, представляющую собой расширенную структуру стек. Необходимо поддерживать добавление
+# элемента на вершину стека, удаление с вершины стека, и необходимо поддерживать операции сложения, вычитания, умножения и целочисленного деления.
+# Операция сложения на стеке определяется следующим образом. Со стека снимается верхний элемент (top1),
+# затем снимается следующий верхний элемент (top2), и затем как результат операции сложения на вершину стека кладется элемент,
+# равный top1 + top2.
+# Аналогичным образом определяются операции вычитания (top1 - top2), умножения (top1 * top2) и целочисленного деления (top1 // top2).
+# Реализуйте эту структуру данных как класс ExtendedStack, отнаследовав его от стандартного класса list.
+# Требуемая структура класса:
+#
+# class ExtendedStack(list):
+#     def sum(self):
+#         # операция сложения
+#
+#     def sub(self):
+#         # операция вычитания
+#
+#     def mul(self):
+#         # операция умножения
+#
+#     def div(self):
+#         # операция целочисленного деления
+# Примечание
+# Для добавления элемента на стек используется метод append, а для снятия со стека – метод pop.
+# Гарантируется, что операции будут совершаться только когда в стеке есть хотя бы два элемента.
+
+
+# class ExtendedStack(list):
+#     def sum(self):
+#         # операция сложения
+#         k = self.pop() + self.pop()
+#         self.append(k)
+#         return self
+#
+#     def sub(self):
+#         # операция вычитания
+#         k = self.pop() - self.pop()
+#         self.append(k)
+#         return self
+#
+#     def mul(self):
+#         # операция умножения
+#         k = self.pop() * self.pop()
+#         self.append(k)
+#         return self
+#     def div(self):
+#         # операция целочисленного деления
+#         k = self.pop() // self.pop()
+#         self.append(k)
+#         return self
+
+
+# def test():
+#     ex_stack = ExtendedStack([1, 2, 3, 4, -3, 3, 5, 10])
+#     ex_stack.div()
+#     assert ex_stack.pop() == 2
+#     ex_stack.sub()
+#     assert ex_stack.pop() == 6
+#     ex_stack.sum()
+#     assert ex_stack.pop() == 7
+#     ex_stack.mul()
+#     assert ex_stack.pop() == 2
+#     assert len(ex_stack) == 0
+#
+# test()
+
+
+
+
+
+
+
+
+# Одно из применений множественного наследование – расширение функциональности класса каким-то заранее определенным способом.
+# Например, если нам понадобится логировать какую-то информацию при обращении к методам класса.
+# Рассмотрим класс Loggable:
+# import time
+#
+# class Loggable:
+#     def log(self, msg):
+#         print(str(time.ctime()) + ": " + str(msg))
+# У него есть ровно один метод log, который позволяет выводить в лог (в данном случае в stdout) какое-то сообщение,
+# добавляя при этом текущее время.
+# Реализуйте класс LoggableList, отнаследовав его от классов list и Loggable таким образом,
+# чтобы при добавлении элемента в список посредством метода append в лог отправлялось сообщение, состоящее из только что добавленного элемента.
+# Примечание
+# Ваша программа не должна содержать класс Loggable. При проверке вашей программе будет доступен этот класс,
+# и он будет содержать метод log, описанный выше.
+
+import time
+
+# class Loggable:
+#     def log(self, msg):
+#         print(str(time.ctime()) + ": " + str(msg))
+#
+#
+# class LoggableList(Loggable, list):
+#     def append(self, elem):
+#         super(LoggableList, self).append(elem)
+#         return self.log(elem)
+
+
+# Внутри класса LoggableList создаем функцию def append
+# Эта функция для нашего класса self должна вставлять элемент elem
+# В следующей строчке переопределяем функцию с помощью super с использованием метода append(elem)
+# Возвращаем self.log(elem)
+# log = LoggableList([1,2,3,4])
+# log.append(5)
+
+
+
+
+
+
+# Вашей программе будет доступна функция foo, которая может бросать исключения.
+# Вам необходимо написать код, который запускает эту функцию,
+# затем ловит исключения ArithmeticError, AssertionError, ZeroDivisionError и выводит имя пойманного исключения.
+# Пример решения, которое вы должны отправить на проверку.
+#
+# try:
+#     foo()
+# except Exception as e:
+#     print()
+# except BaseException:
+#     print("BaseException")
+#
+# Подсказка: https://docs.python.org/3/library/exceptions.html#exception-hierarchy
+#
+# print(ZeroDivisionError.mro())
+# print(AssertionError.mro())
+
+# def foo():
+#     return 1/0
+# try:
+#     foo()
+# except ZeroDivisionError:
+#     print('ZeroDivisionError')
+# except ArithmeticError:
+#     print('ArithmeticError')
+# except AssertionError:
+#     print('AssertionError')
+# except BaseException:
+#     print("BaseException")
+
+
+
+
+
+
+
+# Вам дано описание наследования классов исключений в следующем формате.
+# <имя исключения 1> : <имя исключения 2> <имя исключения 3> ... <имя исключения k>
+# Это означает, что исключение 1 наследуется от исключения 2, исключения 3, и т. д.
+# Или эквивалентно записи:
+# class Error1(Error2, Error3 ... ErrorK):
+#     pass
+# Антон написал код, который выглядит следующим образом.
+# try:
+#    foo()
+# except <имя 1>:
+#    print("<имя 1>")
+# except <имя 2>:
+#    print("<имя 2>")
+# ...
+# Костя посмотрел на этот код и указал Антону на то, что некоторые исключения можно не ловить, так как ранее в коде будет пойман их предок.
+# Но Антон не помнит какие исключения наследуются от каких. Помогите ему выйти из неловкого положения и напишите программу,
+# которая будет определять обработку каких исключений можно удалить из кода.
+# Важное примечание:
+# В отличие от предыдущей задачи, типы исключений не созданы.
+# Создавать классы исключений также не требуется
+# Мы просим вас промоделировать этот процесс, и понять какие из исключений можно и не ловить, потому что мы уже ранее где-то поймали их предка.
+# Формат входных данных
+# В первой строке входных данных содержится целое число n - число классов исключений.
+# В следующих n строках содержится описание наследования классов. В i-й строке указано от каких классов наследуется i-й класс.
+# Обратите внимание, что класс может ни от кого не наследоваться. Гарантируется, что класс не наследуется сам от себя (прямо или косвенно),
+# что класс не наследуется явно от одного класса более одного раза.
+# В следующей строке содержится число m - количество обрабатываемых исключений.
+# Следующие m строк содержат имена исключений в том порядке, в каком они были написаны у Антона в коде.
+# Гарантируется, что никакое исключение не обрабатывается дважды.
+# Формат выходных данных
+# Выведите в отдельной строке имя каждого исключения, обработку которого можно удалить из кода,
+# не изменив при этом поведение программы. Имена следует выводить в том же порядке, в котором они идут во входных данных.
+# Пример теста 1
+# Рассмотрим код
+# try:
+#    foo()
+# except ZeroDivision :
+#    print("ZeroDivision")
+# except OSError:
+#    print("OSError")
+# except ArithmeticError:
+#    print("ArithmeticError")
+# except FileNotFoundError:
+#    print("FileNotFoundError")
+# ...
+# По условию этого теста, Костя посмотрел на этот код, и сказал Антону, что исключение FileNotFoundError
+# можно не ловить, ведь мы уже ловим OSError -- предок FileNotFoundError
+# Sample Input:
+# 4
+# ArithmeticError
+# ZeroDivisionError : ArithmeticError
+# OSError
+# FileNotFoundError : OSError
+# 4
+# ZeroDivisionError
+# OSError
+# ArithmeticError
+# FileNotFoundError
+# Sample Output:
+# FileNotFoundError
+#
+# n = int(input())
+# lst_errors_input = [input() for i in range(n)]
+# m = int(input())
+# lst_errors_check = [input() for i in range(m)]
+
+#testing
+# n = 4
+# lst_errors_input = ['winter', 'is', 'coming', 'OMG: winter is coming']
+# m = 4
+# lst_errors_check = ['winter', 'is', 'coming', 'OMG']
+# Output:
+# OMG
+
+
+# lst_errors_input = ['ArithmeticError', 'ZeroDivisionError : ArithmeticError', 'OSError', 'FileNotFoundError : OSError']
+# lst_errors_check = ['ZeroDivisionError', 'OSError', 'ArithmeticError', 'FileNotFoundError']
+# d = dict()
+# for i in lst_errors_input:
+#     if ':' not in i:
+#         d[i] = i
+#         continue
+#     child, father = i.split(':')
+#     child, father = child.strip(), father.strip()
+#     if i in d:
+#         pass
+#     else:
+#         d[child] = father
+#
+# l = (list(d.keys()))
+# for i in range(len(lst_errors_check)):
+#     if lst_errors_check[i] == l[i] and d[l[i]] != l[i]:
+#         print(lst_errors_check[i])
+#
+
+
 
 
