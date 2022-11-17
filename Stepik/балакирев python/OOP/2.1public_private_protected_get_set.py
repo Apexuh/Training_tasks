@@ -400,5 +400,230 @@ from cmath import rect
 # Объявите в программе классы LinkedList и ObjList в соответствии с заданием.
 # P.S. На экран ничего выводить не нужно.
 
+# class LinkedList:
+#     def __init__(self):
+#         self.head = None
+#         self.tail = None
+#
+#
+#
+#     def add_obj(self, obj):
+#         ''' - добавление нового объекта obj класса ObjList в конец связного списка;'''
+#         if self.tail:
+#             self.tail.set_next(obj)
+#         obj.set_prev(self.tail)
+#         self.tail = obj
+#
+#         if not self.head:
+#             self.head = obj
+#
+#     def remove_obj(self):
+#         ''' - удаление последнего объекта из связного списка;'''
+#         if self.tail is None:
+#             return
+#         prev = self.tail.get_prev()
+#         if prev:
+#             prev.set_next(None)
+#         self.tail = prev
+#
+#         if self.tail is None:
+#             self.head = None
+#
+#     def get_data(self):
+#         '''- получение списка из строк локального свойства __data всех объектов связного списка.'''
+#         s = []
+#         h = self.head
+#         while h:
+#             s.append(h.get_data())
+#             h = h.get_next()
+#         return s
+# class ObjList:
+#     def __init__(self, data):
+#         self.__data = data
+#         self.__next = self.__prev = None
+#     def set_next(self, obj):
+#         '''- изменение приватного свойства __next на значение obj;'''
+#         self.__next = obj
+#     def set_prev(self, obj):
+#         '''- изменение приватного свойства __prev на значение obj;'''
+#         self.__prev = obj
+#     def get_next(self):
+#         ''' - получение значения приватного свойства __next;'''
+#         return self.__next
+#     def get_prev(self):
+#         '''- получение значения приватного свойства __prev;'''
+#         return self.__prev
+#     def set_data(self, data):
+#         '''- изменение приватного свойства __data на значение data;'''
+#         self.__data = data
+#     def get_data(self):
+#         '''- получение значения приватного свойства __data.'''
+#         return self.__data
+
+
+# ls = LinkedList()
+# ls.add_obj(ObjList("данные 1"))
+# ls.add_obj(ObjList("данные 2"))
+# ls.add_obj(ObjList("данные 3"))
+# ls.add_obj(ObjList("данные 34"))
+# # print(ls.LST)
+# assert ls.get_data() == ['данные 1', 'данные 2', 'данные 3', 'данные 34'], "метод get_data вернул неверные данные"
+# #
+# ls_one = LinkedList()
+# ls_one.add_obj(ObjList(1))
+# assert ls_one.get_data() == [1], "метод get_data вернул неверные данные"
+# #
+# h = ls_one.head
+# n = 0
+# while h:
+#     n += 1
+#     h = h.get_next()
+#     print(h)
+#
+# assert n == 1, "неверное число объектов в списке: возможно некорректно работает метод add_obj"
+# ls_one.remove_obj()
+# assert ls_one.get_data() == [], "метод get_data вернул неверные данные для пустого списка, возможно, неверно работает метод remove_obj"
+#
+# ls2 = LinkedList()
+# assert ls.head != ls2.head, "атрибут head должен принадлежать объекту класса LinkedList, а не самому классу"
+# assert ls.tail != ls2.tail, "атрибут tail должен принадлежать объекту класса LinkedList, а не самому классу"
+#
+# h = ls.head
+# n = 0
+# while h:
+#     n += 1
+#     h = h.get_next()
+#
+# assert n == 4, "неверное число объектов в списке: возможно некорректно работает метод add_obj"
+#
+# h = ls.head
+# n = 0
+# while h:
+#     h = h._ObjList__next
+#     n += 1
+#
+# assert n == 4, "неверное число объектов в списке: возможно некорректные значения в атрибутах __next"
+#
+# h = ls.tail
+# n = 0
+# while h:
+#     n += 1
+#     h = h.get_prev()
+#
+# assert n == 4, "неверное число объектов в списке: возможно некорректно работает метод add_obj"
+#
+# h = ls.tail
+# n = 0
+# while h:
+#     h = h._ObjList__prev
+#     n += 1
+#
+# assert n == 4, "неверное число объектов в списке: возможно некорректные значения в атрибутах __prev"
+
+
+
+
+
+
+
+
+
+
+
+# Видео-разбор подвига (решение смотреть только после своей попытки): https://youtu.be/HPgJtLb2NV8
+# Подвиг 10 (на повторение). Объявите класс EmailValidator для проверки корректности email-адреса.
+# Необходимо запретить создание объектов этого класса: при создании экземпляров должно возвращаться значение None, например:
+# em = EmailValidator() # None
+# В самом классе реализовать следующие методы класса (@classmethod):
+# get_random_email(cls) - для генерации случайного email-адреса по формату: xxxxxxx...xxx@gmail.com, где x - любой
+# допустимый символ в email (латинский буквы, цифры, символ подчеркивания и точка);
+# check_email(cls, email) - возвращает True, если email записан верно и False - в противном случае.
+# Корректность строки email определяется по следующим критериям:
+# - допустимые символы: латинский алфавит, цифры, символы подчеркивания, точки и собачка @ (одна);
+# - длина email до символа @ не должна превышать 100 (сто включительно);
+# - длина email после символа @ не должна быть больше 50 (включительно);
+# - после символа @ обязательно должна идти хотя бы одна точка;
+# - не должно быть двух точек подряд.
+# Также в классе нужно реализовать приватный статический метод класса:
+# is_email_str(email) - для проверки типа переменной email, если строка, то возвращается значение True, иначе - False.
+# Метод is_email_str() следует использовать в методе check_email() перед проверкой корректности email. Если параметр
+# email не является строкой, то check_email() возвращает False.
+# Пример использования класса EmailValidator (эти строчки в программе писать не нужно):
+# res = EmailValidator.check_email("sc_lib@list.ru") # True
+# res = EmailValidator.check_email("sc_lib@list_ru") # False
+# P.S. В программе требуется объявить только класс. На экран ничего выводить не нужно.
+
+# from random import randint,choice
+#
+# class EmailValidator:
+#     __instance = None
+#     sym1 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.'
+#     sym2 = '@'
+#     symbols = sym1 + sym2
+#
+#     def __new__(cls, *args, **kwargs):
+#         return None
+#
+#     @classmethod
+#     def get_random_email(cls):
+#         #для генерации случайного email-адреса по формату: xxxxxxx...xxx@gmail.com, где x - любой
+#         # допустимый символ в email (латинский буквы, цифры, символ подчеркивания и точка);
+#         mail = ''.join([choice(cls.sym1) for i in range(1,randint(1,100))]) + '@' + ''.join([choice(cls.sym1) for i in range(1,randint(1,49))])
+#         if not cls.check_email(mail):
+#             cls.get_random_email()
+#         return mail
+#
+#     def __is_email_str(email):
+#         if type(email) is str:
+#             return True
+#
+#     @classmethod
+#     def check_email(cls, email):
+#         if not cls.__is_email_str(email):
+#             return False
+#         if len(email[:email.find('@')]) > 100 or len(email[email.find('@'):]) > 51:
+#             return False
+#         if '..' in email or '.' not in email or '@' not in email or email.count('@') != 1:
+#             return False
+#         if email.count('.') > 1:
+#             if email.index('@') < email.find('.'):
+#                 return False
+#         else:
+#             if email.find('.') < email.find('@'):
+#                 return False
+#         for s in email:
+#             if s not in cls.symbols:
+#                 return False
+#         return True
+#
+# # assert EmailValidator.check_email(f"{'a' * 100}@{'b' * 45}.aaaa") == True
+# # assert EmailValidator.check_email("i.like.this.course@my.stepik.domen.org") == True
+# # assert EmailValidator.check_email('name.surname@mail.com') == True
+# # assert EmailValidator.check_email(1342) == False
+# # assert EmailValidator.check_email('a+a@m.c') == False
+# # assert EmailValidator.check_email('aabda..kkk@m.c') == False
+# # assert EmailValidator.check_email('aaaa@bbb..cc') == False
+# # assert EmailValidator.check_email(f"{'a' * 100}@{'b' * 45}.aaaaa") == False
+# # assert EmailValidator.check_email(f"{'a' * 101}@{'b' * 45}.aaaa") == False
+# # assert EmailValidator.check_email(f"{'a'}@{'b' * 45}aaaa") == False
+# # assert EmailValidator.check_email('name.surnamemail.com') == False
+# # assert EmailValidator.check_email('name@mail') == False
+#
+# # d = EmailValidator.get_random_email()
+# # print(d)
+#
+# assert EmailValidator.check_email("sc_lib@list.ru") == True and EmailValidator.check_email("sc_lib@list_ru") == False and EmailValidator.check_email("sc@lib@list_ru") == False and EmailValidator.check_email("sc.lib@list_ru") == False and EmailValidator.check_email("sclib@list.ru") == True and EmailValidator.check_email("sc.lib@listru") == False and EmailValidator.check_email("sc..lib@list.ru") == False, "метод check_email отработал некорректно"
+#
+# m = EmailValidator.get_random_email()
+# assert EmailValidator.check_email(m) == True, "метод check_email забраковал сгенерированный email методом get_random_email"
+#
+# assert EmailValidator() is None, "при создании объекта класса EmailValidator возвратилось значение отличное от None"
+#
+# assert EmailValidator._EmailValidator__is_email_str('abc'), "метод __is_email_str() вернул False для строки"
+
+
+
+
+
 
 
