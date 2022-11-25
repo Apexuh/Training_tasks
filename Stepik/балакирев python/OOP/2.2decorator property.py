@@ -403,51 +403,51 @@
 # P.S. В программе требуется объявить только классы. На экран ничего выводить не нужно.
 
 
-class TreeObj:
-    def __init__(self, indx, value=None):
-        self.index = indx
-        self.value = value
-        self.__left = None
-        self.__right = None
+# class TreeObj:
+#     def __init__(self, indx, value=None):
+#         self.index = indx
+#         self.value = value
+#         self.__left = None
+#         self.__right = None
+#
+#     @property
+#     def left(self):
+#         return self.__left
+#
+#     @left.setter
+#     def left(self, left):
+#         self.__left = left
+#
+#     @property
+#     def right(self):
+#         return self.__right
+#
+#     @right.setter
+#     def right(self, right):
+#         self.__right = right
 
-    @property
-    def left(self):
-        return self.__left
 
-    @left.setter
-    def left(self, left):
-        self.__left = left
-
-    @property
-    def right(self):
-        return self.__right
-
-    @right.setter
-    def right(self, right):
-        self.__right = right
-
-
-class DecisionTree:
-    node = None
-    root = None
-
-    @classmethod
-    def predict(cls, root, x):
-        '''для построения прогноза (прохода по решающему дереву) для вектора x из корневого узла дерева root'''
-        obj = root
-        while obj:
-            obj_next = cls.get_next(obj, x)
-            if obj_next is None:
-                break
-            else:
-                obj = obj_next
-        return obj.value
-
-    @classmethod
-    def get_next(cls, obj, x):
-        if x[obj.index] == 1:
-            return obj.left
-        return obj.right
+# class DecisionTree:
+#     node = None
+#     root = None
+#
+#     @classmethod
+#     def predict(cls, root, x):
+#         '''для построения прогноза (прохода по решающему дереву) для вектора x из корневого узла дерева root'''
+#         obj = root
+#         while obj:
+#             obj_next = cls.get_next(obj, x)
+#             if obj_next is None:
+#                 break
+#             else:
+#                 obj = obj_next
+#         return obj.value
+#
+#     @classmethod
+#     def get_next(cls, obj, x):
+#         if x[obj.index] == 1:
+#             return obj.left
+#         return obj.right
 
 
 #     @classmethod
