@@ -262,7 +262,7 @@
 #         if 0 <= indx <= self.tail.indx:
 #             temp = self.head
 #             while indx != temp.indx:
-#                 temp = temp.next        #нахождение обьекта в памяти с нужным индексом в виде временной ссылки
+#                 temp = temp.next        #ищу обьект в памяти с нужным индексом в виде временной ссылки
 #
 #             if temp.prev:   #если у этой времянки есть предыдущий, то стыковка предыдущего со следующим
 #                 temp.prev.next = temp.next
@@ -276,7 +276,7 @@
 #                 temp = temp.next
 #                 temp.indx -= 1  # замена индексов
 #
-#
+
 #     def __len__(self):
 #         counter = 0
 #         if self.head:
