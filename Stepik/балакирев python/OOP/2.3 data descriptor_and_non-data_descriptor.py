@@ -59,6 +59,7 @@
 #
 #     def __get__(self, instance, owner):
 #         return getattr(instance, self.name)
+
 #     def __set__(self, instance, value):
 #         self.verify_coord(value)
 #         setattr(instance, self.name, value)
