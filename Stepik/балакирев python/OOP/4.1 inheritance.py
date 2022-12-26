@@ -259,9 +259,9 @@
 # dv = DetailView()
 # html = dv.render_request({'url': 'https://site.ru/home'}, 'GET')   # url: https://site.ru/home
 # P.S. В программе нужно объявить только классы. Выводить на экран ничего не нужно.
-
-
-
+#
+#
+#
 # class GenericView:
 #     def __init__(self, methods=('GET',)):
 #         self.methods = methods
