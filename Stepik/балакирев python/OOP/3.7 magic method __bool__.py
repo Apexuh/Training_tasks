@@ -319,114 +319,113 @@
 # pole.show_pole()
 # P.S. В программе на экран выводить ничего не нужно, только объявить классы.
 # from random import randint
-# class Cell:
-#     def __init__(self):
-#         self.__is_open = False
-#         self.__is_mine = False
-#         self.__number = 0
-#
-#     @property
-#     def is_open(self):
-#         return self.__is_open
-#
-#     @is_open.setter
-#     def is_open(self, value):
-#         if type(value) != bool:
-#             raise ValueError("недопустимое значение атрибута")
-#         else:
-#             self.__is_open = value
-#
-#     @property
-#     def is_mine(self):
-#         return self.__is_mine
-#
-#     @is_mine.setter
-#     def is_mine(self, mine):
-#         if type(mine) != bool:
-#             raise ValueError("недопустимое значение атрибута")
-#         else:
-#             self.__is_mine = mine
-#
-#     @property
-#     def number(self):
-#         return self.__number
-#
-#     @number.setter
-#     def number(self, num):
-#         if type(num) != int or num < 0 or num > 8:
-#             raise ValueError("недопустимое значение атрибута")
-#         else:
-#             self.__number = num
-#
-#     def __bool__(self):
-#         return not self.__is_open
-#
-#
-# class GamePole:
-#     __instance = None
-#
-#     def __init__(self, N, M, total_mines):
-#         self._N = N
-#         self._M = M
-#         self._total_mines = total_mines
-#         self.__pole_cells = tuple(tuple(Cell() for _ in range(M)) for _ in range(N))
-#         self.init_pole() #вызов инициализатора поля
-#
-#     def __new__(cls, *args, **kwargs):
-#         if not cls.__instance:
-#             cls.__instance = super().__new__(cls)
-#         return cls.__instance
-#
-#     def __del__(self):
-#         GamePole.__instance = None
-#
-#     @property
-#     def pole(self):
-#         return self.__pole_cells
-#
-#     def init_pole(self):
-#         '''расставляет мины и делает все клетки закрытыми'''
-#
-#         '''закрыл поля и сбросил мины'''
-#         for row in self.__pole_cells:
-#             for x in row:
-#                 x.is_open = False
-#                 x.is_mine = False
-#
-#         '''наполнение минами'''
-#         m = 0
-#         while m < self._total_mines:
-#             i = randint(0, self._N - 1)
-#             j = randint(0, self._M - 1)
-#             if self.__pole_cells[i][j].is_mine:
-#                 continue
-#             self.__pole_cells[i][j].is_mine = True
-#             m += 1
-#
-#         '''проверка на мины, без добавления дополнительных полей, супер'''
-#         indx = (-1, -1), (-1, 0), (-1, 1),(0, -1), (0, 1),(1, -1), (1, 0), (1, 1)
-#         for x in range(self._N):
-#             for y in range(self._M):
-#                 if not self.pole[x][y].is_mine:
-#                     mines = sum((self.pole[x + i][y + j].is_mine for i, j in indx if 0 <= x + i < self._N and 0 <= y + j < self._M))
-#                     self.pole[x][y].number = mines
-#
-#
-#
-#     def open_cell(self, i, j):
-#         if not 0 <= i < self._N or not 0 <= j < self._M:
-#             raise IndexError('некорректные индексы i, j клетки игрового поля')
-#         self.pole[i][j].is_open = True
-#
-#     def show_pole(self):
-#         for row in self.pole:
-#             print(*map(lambda x: '#' if not x.is_open else x.number if not x.is_mine else '*', row))
-#         print('=' * self._M)
+class Cell:
+    def __init__(self):
+        self.__is_open = False
+        self.__is_mine = False
+        self.__number = 0
+
+    @property
+    def is_open(self):
+        return self.__is_open
+
+    @is_open.setter
+    def is_open(self, value):
+        if type(value) != bool:
+            raise ValueError("недопустимое значение атрибута")
+        else:
+            self.__is_open = value
+
+    @property
+    def is_mine(self):
+        return self.__is_mine
+
+    @is_mine.setter
+    def is_mine(self, mine):
+        if type(mine) != bool:
+            raise ValueError("недопустимое значение атрибута")
+        else:
+            self.__is_mine = mine
+
+    @property
+    def number(self):
+        return self.__number
+
+    @number.setter
+    def number(self, num):
+        if type(num) != int or num < 0 or num > 8:
+            raise ValueError("недопустимое значение атрибута")
+        else:
+            self.__number = num
+
+    def __bool__(self):
+        return not self.__is_open
+
+
+class GamePole:
+    __instance = None
+
+    def __init__(self, N, M, total_mines):
+        self._N = N
+        self._M = M
+        self._total_mines = total_mines
+        self.__pole_cells = tuple(tuple(Cell() for _ in range(M)) for _ in range(N))
+        self.init_pole() #вызов инициализатора поля
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.__instance:
+            cls.__instance = super().__new__(cls)
+        return cls.__instance
+
+    def __del__(self):
+        GamePole.__instance = None
+
+    @property
+    def pole(self):
+        return self.__pole_cells
+
+    def init_pole(self):
+        '''расставляет мины и делает все клетки закрытыми'''
+
+        '''закрыл поля и сбросил мины'''
+        for row in self.__pole_cells:
+            for x in row:
+                x.is_open = False
+                x.is_mine = False
+
+        '''наполнение минами'''
+        m = 0
+        while m < self._total_mines:
+            i = randint(0, self._N - 1)
+            j = randint(0, self._M - 1)
+            if self.__pole_cells[i][j].is_mine:
+                continue
+            self.__pole_cells[i][j].is_mine = True
+            m += 1
+
+        '''проверка на мины, без добавления дополнительных полей, супер'''
+        indx = (-1, -1), (-1, 0), (-1, 1),(0, -1), (0, 1),(1, -1), (1, 0), (1, 1)
+        for x in range(self._N):
+            for y in range(self._M):
+                if not self.pole[x][y].is_mine:
+                    mines = sum((self.pole[x + i][y + j].is_mine for i, j in indx if 0 <= x + i < self._N and 0 <= y + j < self._M))
+                    self.pole[x][y].number = mines
+
+
+
+    def open_cell(self, i, j):
+        if not 0 <= i < self._N or not 0 <= j < self._M:
+            raise IndexError('некорректные индексы i, j клетки игрового поля')
+        self.pole[i][j].is_open = True
+
+    def show_pole(self):
+        for row in self.pole:
+            print(*map(lambda x: '#' if not x.is_open else x.number if not x.is_mine else '*', row))
+        print('=' * self._M)
 
 
 
 # pole = GamePole(4,7, 12)
-# # print(pole)
 # pole.init_pole()
 # print(pole.open_cell(2,3))
 
@@ -541,84 +540,84 @@
 # P.S. В программе на экран выводить ничего не нужно, только объявить класс.
 
 
-class Vector:
-    def __init__(self, *args):
-        self.coords = args
-
-    def __add__(self, other):
-        if isinstance(other, Vector):
-            if len(self.coords) == len(other.coords):
-                return Vector(*(self.coords[i] + other.coords[i] for i in range(len(self.coords))))
-            else:
-                raise ArithmeticError('размерности векторов не совпадают')
-        else:
-            return Vector(*(self.coords[i] + other for i in range(len(self.coords))))
-
-    def __sub__(self, other):
-        if isinstance(other, Vector):
-            if len(self.coords) == len(other.coords):
-                return Vector(*(self.coords[i] - other.coords[i] for i in range(len(self.coords))))
-            else:
-                raise ArithmeticError('размерности векторов не совпадают')
-        else:
-            return Vector(*(self.coords[i] - other for i in range(len(self.coords))))
-
-    def __mul__(self, other):
-        if isinstance(other, Vector):
-            if len(self.coords) == len(other.coords):
-                return Vector(*(self.coords[i] * other.coords[i] for i in range(len(self.coords))))
-            else:
-                raise ArithmeticError('размерности векторов не совпадают')
-        else:
-            return Vector(*(self.coords[i] * other for i in range(len(self.coords))))
-
-    def __iadd__(self, other):
-        if isinstance(other, Vector):
-            if len(self.coords) == len(other.coords):
-                self.coords = tuple(self.coords[i] + other.coords[i] for i in range(len(self.coords)))
-                return self
-            else:
-                raise ArithmeticError('размерности векторов не совпадают')
-        else:
-            self.coords = tuple(self.coords[i] + other for i in range(len(self.coords)))
-            return self
-
-    def __isub__(self, other):
-        if isinstance(other, Vector):
-            if len(self.coords) == len(other.coords):
-                self.coords = tuple(self.coords[i] - other.coords[i] for i in range(len(self.coords)))
-                return self
-            else:
-                raise ArithmeticError('размерности векторов не совпадают')
-        else:
-            self.coords = tuple(self.coords[i] - other for i in range(len(self.coords)))
-            return self
-
-    def __eq__(self, other):
-        return tuple(self.coords) == tuple(other.coords)
-
-    # def __eq__(self, other):
-    #     if isinstance(other, Vector):
-    #         if len(self.coords) == len(other.coords):
-    #             self.coords = all(tuple(self.coords[i] == other.coords[i] for i in range(len(self.coords))))
-    #             return self
-    #         else:
-    #             raise ArithmeticError('размерности векторов не совпадают')
-
-v1 = Vector(1, 2, 3)
-v2 = Vector(4, 5, 6)
-print((v1 + v2).coords)  # [5, 7, 9]
-print((v1 - v2).coords)  # [-3, -3, -3]
-print((v1 * v2).coords)  # [4, 10, 18]
-
-v1 += 10
-print(v1.coords)  # [11, 12, 13]
-v1 -= 10
-print(v1.coords)  # [1, 2, 3]
-v1 += v2
-print(v1.coords)  # [5, 7, 9]
-v2 -= v1
-print(v2.coords)  # [-1, -2, -3]
-
-print(v1 == v2)  # False
-print(v1 != v2)  # True
+# class Vector:
+#     def __init__(self, *args):
+#         self.coords = args
+#
+#     def __add__(self, other):
+#         if isinstance(other, Vector):
+#             if len(self.coords) == len(other.coords):
+#                 return Vector(*(self.coords[i] + other.coords[i] for i in range(len(self.coords))))
+#             else:
+#                 raise ArithmeticError('размерности векторов не совпадают')
+#         else:
+#             return Vector(*(self.coords[i] + other for i in range(len(self.coords))))
+#
+#     def __sub__(self, other):
+#         if isinstance(other, Vector):
+#             if len(self.coords) == len(other.coords):
+#                 return Vector(*(self.coords[i] - other.coords[i] for i in range(len(self.coords))))
+#             else:
+#                 raise ArithmeticError('размерности векторов не совпадают')
+#         else:
+#             return Vector(*(self.coords[i] - other for i in range(len(self.coords))))
+#
+#     def __mul__(self, other):
+#         if isinstance(other, Vector):
+#             if len(self.coords) == len(other.coords):
+#                 return Vector(*(self.coords[i] * other.coords[i] for i in range(len(self.coords))))
+#             else:
+#                 raise ArithmeticError('размерности векторов не совпадают')
+#         else:
+#             return Vector(*(self.coords[i] * other for i in range(len(self.coords))))
+#
+#     def __iadd__(self, other):
+#         if isinstance(other, Vector):
+#             if len(self.coords) == len(other.coords):
+#                 self.coords = tuple(self.coords[i] + other.coords[i] for i in range(len(self.coords)))
+#                 return self
+#             else:
+#                 raise ArithmeticError('размерности векторов не совпадают')
+#         else:
+#             self.coords = tuple(self.coords[i] + other for i in range(len(self.coords)))
+#             return self
+#
+#     def __isub__(self, other):
+#         if isinstance(other, Vector):
+#             if len(self.coords) == len(other.coords):
+#                 self.coords = tuple(self.coords[i] - other.coords[i] for i in range(len(self.coords)))
+#                 return self
+#             else:
+#                 raise ArithmeticError('размерности векторов не совпадают')
+#         else:
+#             self.coords = tuple(self.coords[i] - other for i in range(len(self.coords)))
+#             return self
+#
+#     def __eq__(self, other):
+#         return tuple(self.coords) == tuple(other.coords)
+#
+#     # def __eq__(self, other):
+#     #     if isinstance(other, Vector):
+#     #         if len(self.coords) == len(other.coords):
+#     #             self.coords = all(tuple(self.coords[i] == other.coords[i] for i in range(len(self.coords))))
+#     #             return self
+#     #         else:
+#     #             raise ArithmeticError('размерности векторов не совпадают')
+#
+# v1 = Vector(1, 2, 3)
+# v2 = Vector(4, 5, 6)
+# print((v1 + v2).coords)  # [5, 7, 9]
+# print((v1 - v2).coords)  # [-3, -3, -3]
+# print((v1 * v2).coords)  # [4, 10, 18]
+#
+# v1 += 10
+# print(v1.coords)  # [11, 12, 13]
+# v1 -= 10
+# print(v1.coords)  # [1, 2, 3]
+# v1 += v2
+# print(v1.coords)  # [5, 7, 9]
+# v2 -= v1
+# print(v2.coords)  # [-1, -2, -3]
+#
+# print(v1 == v2)  # False
+# print(v1 != v2)  # True
