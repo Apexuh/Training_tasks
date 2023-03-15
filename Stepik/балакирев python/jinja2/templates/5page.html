@@ -1,0 +1,9 @@
+{% import '5dialogs.html' as dlg %}
+{% include '5header.html' %}
+
+<!--{% include '5header5.html' ignore missing %}-->
+<!--для игнорирования если файл не найден-->
+
+<p>Содержимое страницы</p>
+{{ dlg.dialog_1('Warning','This is test dialog') }}
+{% include '5footer.html' %}

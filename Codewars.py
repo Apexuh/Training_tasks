@@ -55,34 +55,60 @@
 #     an equals method, to check that two vectors that have the same components are equal
 # Note: the test cases will utilize the user-provided equals method.
 
-class Vector:
-    def __init__(self, *args):
-        self._data = list(*args)
-
-    def add(self, other):
-        return Vector([self._data[i] + other._data[i] for i in range(len(self._data))])
-
-    def substract(self, other):
-        return Vector([self._data[i] - other._data[i] for i in range(len(self._data))])
-
-    def dot(self, other):
-        return sum(self._data[i] * other._data[i] for i in range(len(self._data)))
-
-    def norm(self):
-        return sum(i ** 2 for i in self._data) ** 0.5
-
-    def equals(self, other):
-        return self._data == other._data
-
-    def __str__(self):
-        return f"{str(tuple(self._data))}".replace(' ','')
-a = Vector([1, 2, 3])
+# class Vector:
+#     def __init__(self, *args):
+#         self._data = list(*args)
+#
+#     def add(self, other):
+#         return Vector([self._data[i] + other._data[i] for i in range(len(self._data))])
+#
+#     def substract(self, other):
+#         return Vector([self._data[i] - other._data[i] for i in range(len(self._data))])
+#
+#     def dot(self, other):
+#         return sum(self._data[i] * other._data[i] for i in range(len(self._data)))
+#
+#     def norm(self):
+#         return sum(i ** 2 for i in self._data) ** 0.5
+#
+#     def equals(self, other):
+#         return self._data == other._data
+#
+#     def __str__(self):
+#         return f"{str(tuple(self._data))}".replace(' ','')
+# a = Vector([1, 2, 3])
+# # print(a)
+# b = Vector([3, 4, 5])
+# c = Vector([5, 6, 7, 8])
+# a.add(b)      # should return a new Vector([4, 6, 8])
+# # a.subtract(b) # should return a new Vector([-2, -2, -2])
+# # a.dot(b)      # should return 1*3 + 2*4 + 3*5 = 26
+# # a.norm()      # should return sqrt(1^2 + 2^2 + 3^2) = sqrt(14)
+# # a.add(c)
 # print(a)
-b = Vector([3, 4, 5])
-c = Vector([5, 6, 7, 8])
-a.add(b)      # should return a new Vector([4, 6, 8])
-# a.subtract(b) # should return a new Vector([-2, -2, -2])
-# a.dot(b)      # should return 1*3 + 2*4 + 3*5 = 26
-# a.norm()      # should return sqrt(1^2 + 2^2 + 3^2) = sqrt(14)
-# a.add(c)
-print(a)
+
+
+
+
+# ======================================
+
+
+# 3 kyu
+def validate_battlefield(field):
+    index = [(i, x) for i, v in enumerate(field) for x, y in enumerate(v) if y == 1]
+    # one = [(x,y) for i in index for x, y in i if x > 0 and]
+    return True
+
+battleField = [[1, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+                 [1, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+                 [1, 0, 1, 0, 1, 1, 1, 0, 1, 0],
+                 [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+validate_battlefield(battleField)
+# assert validate_battlefield(battleField) ==  True, "Nope, something is wrong!"
